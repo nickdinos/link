@@ -1,0 +1,406 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/nickdinos/link/blob/main/MATH-152_Python1HW\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "20c00fa5",
+      "metadata": {
+        "id": "20c00fa5"
+      },
+      "source": [
+        "## MATH 152 Lab 2 Solutions"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "7c243ef1",
+      "metadata": {
+        "id": "7c243ef1"
+      },
+      "source": [
+        "Put team members' names and section number here."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "id": "cf836732",
+      "metadata": {
+        "id": "cf836732"
+      },
+      "outputs": [],
+      "source": [
+        "import sympy as sp\n",
+        "from sympy.plotting import (plot,plot_parametric)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "a0cd9e48",
+      "metadata": {
+        "id": "a0cd9e48"
+      },
+      "source": [
+        "Instructions: Complete the lab assignment in your assigned groups. Unless stated otherwise, your answers should be obtained using Python code.\n",
+        "\n",
+        "Do not modify the cell above, as it contains all the packages you will need. It is highly recommended to not use any additional packages."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "3169990f",
+      "metadata": {
+        "id": "3169990f"
+      },
+      "source": [
+        "### Question 1"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 20,
+      "id": "e446931c",
+      "metadata": {
+        "id": "e446931c",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "ef64ae31-3585-4b93-e8f2-0d110a572f81"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "volume = pi/2\n"
+          ]
+        }
+      ],
+      "source": [
+        "\n",
+        "x = sp.Symbol('x')\n",
+        "r1 = sp.sqrt(x)/2 #radius' variables\n",
+        "r2 = sp.sqrt(x)\n",
+        "diameter = r2 - r1\n",
+        "\n",
+        "radius = diameter / 2\n",
+        "\n",
+        "area = sp.pi * radius**2\n",
+        "\n",
+        "volume = sp.integrate(area, (x, 0, 4))\n",
+        "\n",
+        "print(f\"volume = {volume}\")"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "624f219e",
+      "metadata": {
+        "id": "624f219e"
+      },
+      "source": [
+        "### Question 2"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 6,
+      "id": "cbfab3f6",
+      "metadata": {
+        "id": "cbfab3f6",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "5dd6e126-f8b7-477d-bf96-978c0bf4733b"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "the volume of the cake thing in pi: -pi*r**4/2 + r**3*(2*pi*r/3 + 2*pi/3) - pi*r**3 + pi*r/3 - pi/6\n"
+          ]
+        }
+      ],
+      "source": [
+        "x, r = sp.symbols('x r')\n",
+        "\n",
+        "y = (1 - x) * (x - r)\n",
+        "\n",
+        "limits = sp.solve(y, x)\n",
+        "lower_bound = limits[0]\n",
+        "upper_bound = limits[1]\n",
+        "\n",
+        "height = y\n",
+        "\n",
+        "radius = x\n",
+        "\n",
+        "volume_r = sp.integrate(2 * sp.pi * radius * height, (x, lower_bound, upper_bound))\n",
+        "\n",
+        "print(f\"the volume of the cake thing in : {volume_r}\")"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "n4Jvl0jZXZqy"
+      },
+      "id": "n4Jvl0jZXZqy",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "#### 2b"
+      ],
+      "metadata": {
+        "id": "y-v9u5vePw04"
+      },
+      "id": "y-v9u5vePw04"
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "volume_at_r_equals_4 = volume_r.subs(r, 4)\n",
+        "\n",
+        "print(f\"the volume of the cake thing is when r=4: {volume_at_r_equals_4}\")"
+      ],
+      "metadata": {
+        "id": "CQ4Nwo3QPzfI",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "d60ec556-0ff2-42c4-9843-92850f30505f"
+      },
+      "id": "CQ4Nwo3QPzfI",
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "the volume of the cake thing is when r=4: 45*pi/2\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "efdd616f",
+      "metadata": {
+        "id": "efdd616f"
+      },
+      "source": [
+        "#### 2c"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 8,
+      "id": "6fd5ac31",
+      "metadata": {
+        "id": "6fd5ac31",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "9f88a782-2a0e-4252-e346-b7d11576fd95"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "the solutions are this: [-sqrt(-1200/(pi*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)) + 1 + 2*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3))/2 + 1/2 + sqrt(-2*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3) + 2 + 1200/(pi*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)) + 2/sqrt(-1200/(pi*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)) + 1 + 2*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)))/2, sqrt(-1200/(pi*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)) + 1 + 2*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3))/2 + 1/2 - sqrt(-2/sqrt(-1200/(pi*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)) + 1 + 2*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)) - 2*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3) + 2 + 1200/(pi*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)))/2, sqrt(-1200/(pi*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)) + 1 + 2*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3))/2 + 1/2 + sqrt(-2/sqrt(-1200/(pi*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)) + 1 + 2*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)) - 2*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3) + 2 + 1200/(pi*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)))/2, -sqrt(-2*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3) + 2 + 1200/(pi*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)) + 2/sqrt(-1200/(pi*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)) + 1 + 2*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)))/2 - sqrt(-1200/(pi*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3)) + 1 + 2*(-450/pi + sqrt(202500/pi**2 + 216000000/pi**3))**(1/3))/2 + 1/2]\n"
+          ]
+        }
+      ],
+      "source": [
+        "equation = sp.Eq(volume_r, 300)\n",
+        "\n",
+        "solutions = sp.solve(equation, r)\n",
+        "\n",
+        "print(f\"the solutions are this: {solutions}\")"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "b922445e",
+      "metadata": {
+        "id": "b922445e"
+      },
+      "source": [
+        "### Question 3"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "6889b8e7",
+      "metadata": {
+        "id": "6889b8e7"
+      },
+      "source": [
+        "#### 3a"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 17,
+      "id": "d20a7a8e",
+      "metadata": {
+        "id": "d20a7a8e",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "beb50cc1-418f-4b02-c821-4f7b9def6d76"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "v for v(r)= 4*pi*R**3/3\n"
+          ]
+        }
+      ],
+      "source": [
+        "x = sp.Symbol('x') #my calc variable\n",
+        "R = sp.Symbol('R', positive=True)\n",
+        "f = sp.sqrt(R**2 - x**2)\n",
+        "\n",
+        "\n",
+        "limits = sp.solve(f, x)\n",
+        "\n",
+        "volume_R = sp.integrate(sp.pi * f**2, (x, limits[0], limits[1]))\n",
+        "\n",
+        "f_prime = sp.diff(f, x)\n",
+        "\n",
+        "surface_area_R = sp.integrate(2 * sp.pi * f * sp.sqrt(1 + f_prime**2), (x, limits[0], limits[1]))\n",
+        "\n",
+        "dV_dR = sp.diff(volume_R, R)\n",
+        "\n",
+        "print(f\"v for v(r)= {volume_R}\")\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "3a7e1713",
+      "metadata": {
+        "id": "3a7e1713"
+      },
+      "source": [
+        "#### 3b"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 18,
+      "id": "8b00ae4b",
+      "metadata": {
+        "id": "8b00ae4b",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "fa4eeb09-d118-49bf-fc22-6f6fd0faa6a8"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "surface area= 4*pi*R**2\n"
+          ]
+        }
+      ],
+      "source": [
+        "f_p = sp.diff(f, x)#my f prime\n",
+        "\n",
+        "surface_area_R = sp.integrate(2 * sp.pi * f * sp.sqrt(1 + f_p**2), (x, limits[0], limits[1]))\n",
+        "\n",
+        "print(f\"surface area= {surface_area_R}\")"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "id": "588fed78",
+      "metadata": {
+        "id": "588fed78"
+      },
+      "source": [
+        "#### 3c"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 19,
+      "id": "6063c3d4",
+      "metadata": {
+        "id": "6063c3d4",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "005d637b-2e8e-4e75-8f0e-8cde2050649c"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "The surface area A(R) is: 4*pi*R**2\n"
+          ]
+        }
+      ],
+      "source": [
+        "dV_dR = sp.diff(volume_R, R)\n",
+        "\n",
+        "print(f\"The surface area A(R) is: {surface_area_R}\")\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "134vaKgfc6cZ"
+      },
+      "id": "134vaKgfc6cZ",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3 (ipykernel)",
+      "language": "python",
+      "name": "python3"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.9.18"
+    },
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
